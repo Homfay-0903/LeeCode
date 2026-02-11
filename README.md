@@ -1,1 +1,1 @@
-# LeeCode
+# LeeCode Hot100
