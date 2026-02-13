@@ -11,8 +11,13 @@ var maxArea = function (height) {
         let minHeight = Math.min(height[left], height[right])
         let bottomWidth = right - left
         let curArea = minHeight * bottomWidth
-
         maxArea = Math.max(curArea, maxArea)
+
+        if (height[left] < height[right]) {
+            left++
+        } else {
+            right--
+        }
     }
 
     return maxArea
