@@ -39,6 +39,9 @@ var isPalindrome = function (head) {
 };
 
 const reverse = (head) => {
+    if (!head.next) {
+        return head
+    }
     let pre = null
     let cur = head
     while (cur) {
