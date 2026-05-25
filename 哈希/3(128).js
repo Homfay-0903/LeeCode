@@ -2,7 +2,7 @@
  * @param {number[]} nums
  * @return {number}
  */
-/*var longestConsecutive = function (nums) {
+var longestConsecutive = function (nums) {
     const len = nums.length
     if (!len) {
         return 0
@@ -22,10 +22,10 @@
         } else {
             curLen = 1
         }
-    }s
+    }
 
     return maxLen
-};*/
+};
 
 
 var longestConsecutive = function (nums) {
