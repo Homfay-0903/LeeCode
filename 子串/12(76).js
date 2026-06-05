@@ -7,7 +7,7 @@ var minWindow = function (s, t) {
     const sLen = s.length
     const tLen = t.length
 
-    if (!tLen || sLen < tLen) {
+    if (sLen < tLen) {
         return ''
     }
 
@@ -16,6 +16,7 @@ var minWindow = function (s, t) {
 
     for (let i = 0; i < tLen; i++) {
         const char = t[i]
+
         needObj[char] = (needObj[char] || 0) + 1
     }
 
@@ -31,10 +32,8 @@ var minWindow = function (s, t) {
 
         haveObj[char] = (haveObj[char] || 0) + 1
 
-        if (needObj[char]) {
-            if (haveObj[char] === needObj[char]) {
-                species++
-            }
+        if (haveObj[char] === needObj[char]) {
+            species++
         }
 
         while (species === needSize) {
@@ -46,12 +45,11 @@ var minWindow = function (s, t) {
             const removeChar = s[curStart]
             curStart++
 
-            if (needObj[removeChar] === haveObj[removeChar]) {
+            if (haveObj[removeChar] === needObj[removeChar]) {
                 species--
             }
 
             haveObj[removeChar]--
-
         }
     }
 
