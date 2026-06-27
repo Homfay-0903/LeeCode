@@ -8,6 +8,7 @@ var minWindow = function (s, t) {
     const n = t.length
     const haveObj = {}, needObj = {}
 
+    // can cancel
     if (m < n) {
         return ''
     }
