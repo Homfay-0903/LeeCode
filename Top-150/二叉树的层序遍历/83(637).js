@@ -10,23 +10,25 @@
  * @param {TreeNode} root
  * @return {number[]}
  */
-var rightSideView = function (root) {
+var averageOfLevels = function (root) {
     const res = []
-
-    if (!root) {
-        return res
-    }
-
     const nodeQueue = [root]
 
     while (nodeQueue.length) {
+        const curRes = []
         const curNodeLength = nodeQueue.length
+
+        let curNodeSum = 0
+        let curNodeCount = 0
 
         for (let i = 0; i < curNodeLength; i++) {
             const curNode = nodeQueue.shift()
 
+            curNodeSum += curNode.val
+            curNodeCount++
+
             if (i === curNodeLength - 1) {
-                res.push(curNode.val)
+                res.push(curNodeSum / curNodeCount)
             }
 
             if (curNode.left) {
