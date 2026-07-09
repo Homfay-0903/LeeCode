@@ -8,26 +8,26 @@
  */
 /**
  * @param {TreeNode} root
- * @return {number[]}
+ * @return {number[][]}
  */
-var averageOfLevels = function (root) {
+var levelOrder = function (root) {
+    if (!root) {
+        return []
+    }
+
     const res = []
     const nodeQueue = [root]
 
     while (nodeQueue.length) {
+        const curRes = []
         const curNodeLength = nodeQueue.length
-
-        let curNodeSum = 0
-        let curNodeCount = 0
 
         for (let i = 0; i < curNodeLength; i++) {
             const curNode = nodeQueue.shift()
-
-            curNodeSum += curNode.val
-            curNodeCount++
+            curRes.push(curNode.val)
 
             if (i === curNodeLength - 1) {
-                res.push(curNodeSum / curNodeCount)
+                res.push(curRes)
             }
 
             if (curNode.left) {
