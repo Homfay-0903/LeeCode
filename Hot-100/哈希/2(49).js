@@ -7,7 +7,6 @@ var groupAnagrams = function (strs) {
 
     for (const str of strs) {
         const key = str.split('').sort().join('')
-
         if (map.has(key)) {
             map.get(key).push(str)
         } else {
