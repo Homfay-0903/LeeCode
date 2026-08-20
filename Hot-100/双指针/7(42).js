@@ -3,29 +3,27 @@
  * @return {number}
  */
 var trap = function (height) {
-    let left = 0
-    let right = height.length - 1
-    let leftHighest = 0
-    let rightHighest = 0
-    let res = 0
+    let maxCapcity = 0
+    let left = 0, right = height.length - 1
+    let leftHeightest = 0, rightHeightest = 0
 
     while (left < right) {
         if (height[left] < height[right]) {
-            if (height[left] >= leftHighest) {
-                leftHighest = height[left]
+            if (height[left] > leftHeightest) {
+                leftHeightest = height[left]
             } else {
-                res += leftHighest - height[left]
+                maxCapcity += leftHeightest - height[left]
             }
             left++
         } else {
-            if (height[right] >= rightHighest) {
-                rightHighest = height[right]
+            if (height[right] > rightHeightest) {
+                rightHeightest = height[right]
             } else {
-                res += rightHighest - height[right]
+                maxCapcity += rightHeightest - height[right]
             }
             right--
         }
     }
 
-    return res
+    return maxCapcity
 };
