@@ -3,42 +3,43 @@
  * @return {number[][]}
  */
 var threeSum = function (nums) {
-    const len = nums.length
     const res = []
+    const n = nums.length
+    let pointer = 0
     nums.sort((a, b) => a - b)
 
-    for (let i = 0; i < len - 2; i++) {
-        if (i > 0 && nums[i] === nums[i - 1]) {
-            continue
-        }
-
-        if (nums[i] > 0) {
+    while (pointer < n - 2) {
+        if (nums[pointer] > 0) {
             break
         }
 
-        let left = i + 1
-        let right = len - 1
+        if (pointer > 0 && nums[pointer] === nums[pointer - 1]) {
+            pointer++
+            continue
+        }
 
-        while (left < right) {
-            const curSum = nums[i] + nums[left] + nums[right]
-            if (curSum === 0) {
-                res.push([nums[i], nums[left], nums[right]])
+        let idx1 = pointer, idx2 = pointer + 1, idx3 = n - 1
+        while (idx2 < idx3) {
+            const sum = nums[idx1] + nums[idx2] + nums[idx3]
 
-                left++
-                right--
+            if (sum === 0) {
+                res.push([nums[idx1], nums[idx2], nums[idx3]])
+                idx2++, idx3--
 
-                while (left < right && nums[left] === nums[left - 1]) {
-                    left++
+                while (idx2 < idx3 && nums[idx2] === nums[idx2 - 1]) {
+                    idx2++
                 }
-                while (left < right && nums[right] === nums[right + 1]) {
-                    right--
+                while (idx2 < idx3 && nums[idx3] === nums[idx3 + 1]) {
+                    idx3--
                 }
-            } else if (curSum < 0) {
-                left++
-            } else {
-                right--
+            } else if (sum < 0) {
+                idx2++
+            } else if (sum > 0) {
+                idx3--
             }
         }
+
+        pointer++
     }
 
     return res
