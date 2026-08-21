@@ -3,42 +3,41 @@
  * @param {string} p
  * @return {number[]}
  */
-const arrayEqual = (arr1, arr2) => {
-    for (let i = 0; i < 26; i++) {
-        if (arr1[i] !== arr2[i]) {
-            return false
+var findAnagrams = function (s, p) {
+    function arrEqual(arr1, arr2) {
+        for (let i = 0; i < 26; i++) {
+            if (arr1[i] !== arr2[i]) {
+                return false
+            }
         }
+
+        return true
     }
 
-    return true
-}
-
-var findAnagrams = function (s, p) {
-    const sLen = s.length
-    const pLen = p.length
     const res = []
+    const sLen = s.length, pLen = p.length
+    const countP = new Array(26).fill(0), countWindow = new Array(26).fill(0)
 
     if (sLen < pLen) {
         return res
     }
 
-    const countP = new Array(26).fill(0)
-    const countWindow = new Array(26).fill(0)
-
     for (let i = 0; i < pLen; i++) {
-        countP[p.charCodeAt(i) - 'a'.charCodeAt(0)]++
-        countWindow[s.charCodeAt(i) - 'a'.charCodeAt(0)]++
+        const pCharIdx = p[i].charCodeAt(0) - 'a'.charCodeAt(0)
+        const sCharIdx = s[i].charCodeAt(0) - 'a'.charCodeAt(0)
+        countP[pCharIdx]++, countWindow[sCharIdx]++
     }
 
-    if (arrayEqual(countP, countWindow)) {
+    if (arrEqual(countP, countWindow)) {
         res.push(0)
     }
 
     for (let i = pLen; i < sLen; i++) {
-        countWindow[s.charCodeAt(i - pLen) - 'a'.charCodeAt(0)]--
-        countWindow[s.charCodeAt(i) - 'a'.charCodeAt(0)]++
+        const preCharIdx = s[i - pLen].charCodeAt(0) - 'a'.charCodeAt(0)
+        const curCharIdx = s[i].charCodeAt(0) - 'a'.charCodeAt(0)
+        countWindow[preCharIdx]--, countWindow[curCharIdx]++
 
-        if (arrayEqual(countP, countWindow)) {
+        if (arrEqual(countP, countWindow)) {
             res.push(i - pLen + 1)
         }
     }
