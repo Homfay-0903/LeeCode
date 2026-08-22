@@ -3,23 +3,23 @@
  * @return {number[]}
  */
 var productExceptSelf = function (nums) {
-    const len = nums.length
-    const prefixSum = new Array(len)
-    const suffixSum = new Array(len)
-    const res = new Array(len)
+    const n = nums.length
+    const prefix = new Array(n).fill(0)
+    const subfix = new Array(n).fill(0)
+    const res = []
 
-    prefixSum[0] = 1
-    for (let i = 1; i < len; i++) {
-        prefixSum[i] = prefixSum[i - 1] * nums[i - 1]
+    prefix[0] = 1
+    for (let i = 1; i < n; i++) {
+        prefix[i] = prefix[i - 1] * nums[i - 1]
     }
 
-    suffixSum[len - 1] = 1
-    for (let i = len - 2; i >= 0; i--) {
-        suffixSum[i] = suffixSum[i + 1] * nums[i + 1]
+    subfix[n - 1] = 1
+    for (let i = n - 2; i >= 0; i--) {
+        subfix[i] = subfix[i + 1] * nums[i + 1]
     }
 
-    for (let i = 0; i < len; i++) {
-        res[i] = prefixSum[i] * suffixSum[i]
+    for (let i = 0; i < n; i++) {
+        res[i] = prefix[i] * subfix[i]
     }
 
     return res
