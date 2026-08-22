@@ -4,21 +4,19 @@
  * @return {number}
  */
 var subarraySum = function (nums, k) {
-    const prefixMap = new Map()
-    prefixMap.set(0, 1)
-
-    let curSum = 0
-    let count = 0
+    const map = new Map()
+    map.set(0, 1)
+    let sum = 0, res = 0
 
     for (const num of nums) {
-        curSum += num
+        sum += num
 
-        if (prefixMap.has(curSum - k)) {
-            count += prefixMap.get(curSum - k)
+        if (map.has(sum - k)) {
+            res += map.get(sum - k)
         }
 
-        prefixMap.set(curSum, (prefixMap.get(curSum) || 0) + 1)
+        map.set(sum, (map.get(sum) || 0) + 1)
     }
 
-    return count
+    return res
 };
