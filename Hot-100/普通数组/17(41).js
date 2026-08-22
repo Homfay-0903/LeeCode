@@ -3,22 +3,22 @@
  * @return {number}
  */
 var firstMissingPositive = function (nums) {
-    const len = nums.length
+    const n = nums.length
 
-    for (let i = 0; i < len; i++) {
-        while (nums[i] > 0 && nums[i] <= len && nums[i] !== nums[nums[i] - 1]) {
-            const targetIndex = nums[i] - 1
+    for (let i = 0; i < n; i++) {
+        while (nums[i] > 0 && nums[i] !== nums[nums[i] - 1]) {
+            const targetIdx = nums[i] - 1
             const temp = nums[i]
-            nums[i] = nums[nums[i] - 1]
-            nums[targetIndex] = temp
+            nums[i] = nums[targetIdx]
+            nums[targetIdx] = temp
         }
     }
 
-    for (let i = 0; i < len; i++) {
+    for (let i = 0; i < n; i++) {
         if (nums[i] !== i + 1) {
             return i + 1
         }
     }
 
-    return len + 1
+    return n + 1
 };
