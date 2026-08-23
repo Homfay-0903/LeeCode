@@ -3,12 +3,12 @@
  * @return {number[]}
  */
 var spiralOrder = function (matrix) {
-    let left = 0, right = matrix[0].length - 1
-    let top = 0, bottom = matrix.length - 1
     const res = []
+    const m = matrix.length, n = matrix[0].length
+    let left = 0, right = n - 1
+    let top = 0, bottom = m - 1
 
     while (left <= right && top <= bottom) {
-
         for (let i = left; i <= right; i++) {
             res.push(matrix[top][i])
         }
