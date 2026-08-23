@@ -4,19 +4,16 @@
  * @return {boolean}
  */
 var searchMatrix = function (matrix, target) {
-    const rowLen = matrix.length
-    const colLen = matrix[0].length
-    let curRow = 0, curCol = colLen - 1
+    const m = matrix.length, n = matrix[0].length
+    let rowIdx = 0, colIdx = n - 1
 
-    while (curRow < rowLen && curCol >= 0) {
-        const curNum = matrix[curRow][curCol]
-
-        if (curNum === target) {
+    while (rowIdx < m && colIdx >= 0) {
+        if (matrix[rowIdx][colIdx] === target) {
             return true
-        } else if (curNum > target) {
-            curCol--
-        } else {
-            curRow++
+        } else if (matrix[rowIdx][colIdx] < target) {
+            rowIdx++
+        } else if (matrix[rowIdx][colIdx] > target) {
+            colIdx--
         }
     }
 
