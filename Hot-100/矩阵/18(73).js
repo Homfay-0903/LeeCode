@@ -3,53 +3,54 @@
  * @return {void} Do not return anything, modify matrix in-place instead.
  */
 var setZeroes = function (matrix) {
-    const rowLen = matrix.length
-    const colLen = matrix[0].length
-    let rowHasZero = false
-    let colHasZero = false
+    const m = matrix.length
+    const n = matrix[0].length
+    let rowHasZero = false, colHasZero = false
 
-    for (let i = 0; i < rowLen; i++) {
-        if (!matrix[i][0]) {
-            colHasZero = true
-        }
-    }
-    for (let i = 0; i < colLen; i++) {
-        if (!matrix[0][i]) {
+    for (let i = 0; i < n; i++) {
+        if (matrix[0][i] === 0) {
             rowHasZero = true
+            break
+        }
+    }
+    for (let i = 0; i < m; i++) {
+        if (matrix[i][0] === 0) {
+            colHasZero = true
+            break
         }
     }
 
-    for (let i = 1; i < rowLen; i++) {
-        for (let j = 1; j < colLen; j++) {
-            if (!matrix[i][j]) {
+    for (let i = 1; i < m; i++) {
+        for (let j = 1; j < n; j++) {
+            if (matrix[i][j] === 0) {
                 matrix[i][0] = 0
                 matrix[0][j] = 0
             }
         }
     }
 
-    for (let i = 1; i < rowLen; i++) {
-        if (!matrix[i][0]) {
-            for (let j = 1; j < colLen; j++) {
-                matrix[i][j] = 0
+    for (let i = 1; i < n; i++) {
+        if (matrix[0][i] === 0) {
+            for (let j = 1; j < m; j++) {
+                matrix[j][i] = 0
             }
         }
     }
-    for (let i = 1; i < colLen; i++) {
-        if (!matrix[0][i]) {
-            for (let j = 1; j < rowLen; j++) {
-                matrix[j][i] = 0
+    for (let i = 1; i < m; i++) {
+        if (matrix[i][0] === 0) {
+            for (let j = 1; j < n; j++) {
+                matrix[i][j] = 0
             }
         }
     }
 
     if (rowHasZero) {
-        for (let i = 0; i < colLen; i++) {
+        for (let i = 0; i < n; i++) {
             matrix[0][i] = 0
         }
     }
     if (colHasZero) {
-        for (let i = 0; i < rowLen; i++) {
+        for (let i = 0; i < m; i++) {
             matrix[i][0] = 0
         }
     }
