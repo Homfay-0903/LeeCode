@@ -13,11 +13,9 @@ var rotate = function (matrix) {
 
     for (let i = 0; i < n; i++) {
         let left = 0, right = n - 1
-
         while (left < right) {
             [matrix[i][left], matrix[i][right]] = [matrix[i][right], matrix[i][left]]
-            left++
-            right--
+            left++, right--
         }
     }
 };
