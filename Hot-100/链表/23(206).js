@@ -14,14 +14,13 @@ var reverseList = function (head) {
         return head
     }
 
-    let preNode = null
-    let curNode = head
+    let preNode = null, curNode = head
 
     while (curNode) {
-        const nextNode = curNode.next
+        const next = curNode.next
         curNode.next = preNode
         preNode = curNode
-        curNode = nextNode
+        curNode = next
     }
 
     return preNode
