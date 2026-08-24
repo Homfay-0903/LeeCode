@@ -10,48 +10,45 @@
  * @return {boolean}
  */
 var isPalindrome = function (head) {
+    function reverse(node) {
+        if (!node || !node.next) {
+            return node
+        }
+
+        let preNode = null, curNode = node
+
+        while (curNode) {
+            const next = curNode.next
+            curNode.next = preNode
+            preNode = curNode
+            curNode = next
+        }
+
+        return preNode
+    }
+
     if (!head.next) {
         return true
     }
 
-    let slow = head
-    let fast = head
+    let slow = head, fast = head
 
     while (fast.next && fast.next.next) {
         slow = slow.next
         fast = fast.next.next
     }
 
-    const reversedHalfList = reverse(slow.next)
+    let list1 = head, list2 = slow.next
+    slow.next = null
+    list2 = reverse(list2)
 
-    let p1 = head
-    let p2 = reversedHalfList
-
-    while (p1 && p2) {
-        if (p1.val !== p2.val) {
+    while (list1 && list2) {
+        if (list1.val !== list2.val) {
             return false
         }
-        p1 = p1.next
-        p2 = p2.next
+
+        list1 = list1.next, list2 = list2.next
     }
 
     return true
 };
-
-const reverse = (head) => {
-    if (!head || !head.next) {
-        return head
-    }
-
-    let preNode = null
-    let curNode = head
-
-    while (curNode) {
-        const nextNode = curNode.next
-        curNode.next = preNode
-        preNode = curNode
-        curNode = nextNode
-    }
-
-    return preNode
-}
