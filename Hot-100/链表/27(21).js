@@ -11,8 +11,8 @@
  * @return {ListNode}
  */
 var mergeTwoLists = function (list1, list2) {
-    const virtualNode = new ListNode(null)
-    let curNode = virtualNode
+    const dummy = new ListNode(0)
+    let curNode = dummy
 
     while (list1 && list2) {
         if (list1.val < list2.val) {
@@ -22,11 +22,10 @@ var mergeTwoLists = function (list1, list2) {
             curNode.next = list2
             list2 = list2.next
         }
-
         curNode = curNode.next
     }
 
     curNode.next = list1 ? list1 : list2
 
-    return virtualNode.next
+    return dummy.next
 };
