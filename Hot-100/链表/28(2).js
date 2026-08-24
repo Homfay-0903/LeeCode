@@ -11,17 +11,16 @@
  * @return {ListNode}
  */
 var addTwoNumbers = function (l1, l2) {
-    const virtualNode = new ListNode(null)
-    let curNode = virtualNode
+    const dummy = new ListNode(0)
+    let curNode = dummy
     let carry = 0
 
     while (l1 || l2 || carry) {
-        const x = l1 ? l1.val : 0
-        const y = l2 ? l2.val : 0
-        const curSum = x + y + carry
-
-        const digInt = curSum % 10
-        carry = Math.floor(curSum / 10)
+        const val1 = l1 ? l1.val : 0
+        const val2 = l2 ? l2.val : 0
+        const sum = val1 + val2 + carry
+        const digInt = sum % 10
+        carry = Math.floor(sum / 10)
 
         curNode.next = new ListNode(digInt)
         curNode = curNode.next
@@ -34,5 +33,5 @@ var addTwoNumbers = function (l1, l2) {
         }
     }
 
-    return virtualNode.next
+    return dummy.next
 };
