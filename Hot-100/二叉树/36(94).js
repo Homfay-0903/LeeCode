@@ -13,20 +13,14 @@
 var inorderTraversal = function (root) {
     const res = []
 
-    if (!root) {
-        return res
-    }
-
-    const LDR = (node) => {
-        if (node.left) {
-            LDR(node.left)
+    function LDR(node) {
+        if (!node) {
+            return
         }
 
-        res.push(node)
-
-        if (node.right) {
-            LDR(node.right)
-        }
+        LDR(node.left)
+        res.push(node.val)
+        LDR(node.right)
     }
 
     LDR(root)
