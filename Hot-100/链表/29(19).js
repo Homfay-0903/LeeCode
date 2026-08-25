@@ -11,10 +11,9 @@
  * @return {ListNode}
  */
 var removeNthFromEnd = function (head, n) {
-    const virtualNode = new ListNode(null)
-    let fast = virtualNode
-    let slow = virtualNode
-    virtualNode.next = head
+    const dummy = new ListNode(0)
+    let slow = dummy, fast = dummy
+    dummy.next = head
 
     for (let i = 0; i < n; i++) {
         fast = fast.next
@@ -27,5 +26,5 @@ var removeNthFromEnd = function (head, n) {
 
     slow.next = slow.next.next
 
-    return virtualNode.next
+    return dummy.next
 };
