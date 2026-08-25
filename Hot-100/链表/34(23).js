@@ -10,44 +10,44 @@
  * @return {ListNode}
  */
 var mergeKLists = function (lists) {
-    if (!lists.length) {
-        return null
+    function mergeTwoList(l1, l2) {
+        const dummy = new ListNode(0)
+        let curNode = dummy
+
+        while (l1 && l2) {
+            if (l1.val < l2.val) {
+                curNode.next = l1
+                l1 = l1.next
+            } else {
+                curNode.next = l2
+                l2 = l2.next
+            }
+
+            curNode = curNode.next
+        }
+
+        curNode.next = l1 ? l1 : l2
+
+        return dummy.next
     }
 
+    function divide(left, right) {
+        if (left === right) {
+            return lists[left]
+        } else if (left < right) {
+            const mid = Math.floor((left + right) / 2)
+            return mergeTwoList(divide(left, mid), divide(mid + 1, right))
+        } else {
+            return
+        }
+    }
+
+    if (lists.length === 0) {
+        return null
+    }
     if (lists.length === 1) {
         return lists[0]
     }
 
-    return divide(lists, 0, lists.length - 1)
+    return divide(0, lists.length - 1)
 };
-
-var divide = function (listArray, left, right) {
-    if (left === right) {
-        return listArray[left]
-    } else {
-        const mid = Math.floor((left + right) / 2)
-
-        return mergeTwoLists(divide(listArray, left, mid), divide(listArray, mid + 1, right))
-    }
-}
-
-var mergeTwoLists = function (l1, l2) {
-    const virtualNode = new ListNode(null)
-    let curNode = virtualNode
-
-    while (l1 && l2) {
-        if (l1.val < l2.val) {
-            curNode.next = l1
-            l1 = l1.next
-        } else {
-            curNode.next = l2
-            l2 = l2.next
-        }
-
-        curNode = curNode.next
-    }
-
-    curNode.next = l1 ? l1 : l2
-
-    return virtualNode.next
-}
