@@ -11,21 +11,21 @@
  * @return {boolean}
  */
 var isSymmetric = function (root) {
-    return root === null ? true : check(root.left, root.right)
+    function check(left, right) {
+        if (!left && !right) {
+            return true
+        }
+
+        if (!left || !right) {
+            return false
+        }
+
+        if (left.val !== right.val) {
+            return false
+        }
+
+        return check(left.left, right.right) && check(left.right, right.left)
+    }
+
+    return root === null ? false : check(root.left, root.right)
 };
-
-var check = function (leftNode, rightNode) {
-    if (!leftNode && !rightNode) {
-        return true
-    }
-
-    if (!leftNode || !rightNode) {
-        return false
-    }
-
-    if (leftNode.val !== rightNode.val) {
-        return false
-    }
-
-    return check(leftNode.left, rightNode.right) && check(leftNode.right, rightNode.left)
-}
