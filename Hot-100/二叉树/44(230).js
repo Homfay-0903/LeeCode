@@ -14,19 +14,17 @@
 var kthSmallest = function (root, k) {
     const res = []
 
-    const traverse = (node) => {
+    function LDR(node) {
         if (!node) {
             return
         }
 
-        //res.push(node.val)
-        traverse(node.left)
+        LDR(node.left)
         res.push(node.val)
-        traverse(node.right)
+        LDR(node.right)
     }
 
-    traverse(root)
-    //res.sort((a, b) => a - b)
+    LDR(root)
 
     return res[k - 1]
 };
