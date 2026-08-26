@@ -12,7 +12,7 @@
  * @return {TreeNode}
  */
 var lowestCommonAncestor = function (root, p, q) {
-    if (!root || root === q || root === p) {
+    if (!root || root === p || root === q) {
         return root
     }
 
@@ -20,7 +20,7 @@ var lowestCommonAncestor = function (root, p, q) {
     const right = lowestCommonAncestor(root.right, p, q)
 
     if (!left || !right) {
-        return left ? left : right
+        return !left ? right : left
     }
 
     return root

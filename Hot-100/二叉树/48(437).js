@@ -16,23 +16,20 @@ var pathSum = function (root, targetSum) {
         return 0
     }
 
-    const prefixSum = new Map()
-    prefixSum.set(0, 1)
+    const prefixMap = new Map()
+    prefixMap.set(0, 1)
 
-    const dfs = (node, curSum) => {
+    function dfs(node, curSum) {
         if (!node) {
             return 0
         }
 
         curSum += node.val
 
-        let count = prefixSum.get(curSum - targetSum) || 0
-        prefixSum.set(curSum, (prefixSum.get(curSum) || 0) + 1)
-
-        count += dfs(node.left, curSum)
-        count += dfs(node.right, curSum)
-
-        prefixSum.set(curSum, prefixSum.get(curSum) - 1)
+        let count = prefixMap.get(curSum - targetSum) || 0
+        prefixMap.set(curSum, (prefixMap.get(curSum) || 0) + 1)
+        count += dfs(node.left, curSum), count += dfs(node.right, curSum)
+        prefixMap.set(curSum, prefixMap.get(curSum) - 1)
 
         return count
     }
