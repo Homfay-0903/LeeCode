@@ -19,17 +19,18 @@ var buildTree = function (preorder, inorder) {
         return new TreeNode(preorder[0])
     }
 
-    const root = new TreeNode(preorder[0])
-    const rootIndexOfInorder = inorder.indexOf(root.val)
+    const rootVal = preorder[0]
+    const rootIdx = inorder.indexOf(rootVal)
+    const root = new TreeNode(rootVal)
 
-    const preorderOfLeft = preorder.slice(1, 1 + rootIndexOfInorder)
-    const inorderOfLeft = inorder.slice(0, rootIndexOfInorder)
+    const leftPreorder = preorder.slice(1, 1 + rootIdx)
+    const leftInorder = inorder.slice(0, rootIdx)
 
-    const preorderOfRight = preorder.slice(rootIndexOfInorder + 1)
-    const inorderOfRight = preorder.slice(rootIndexOfInorder + 1)
+    const rightPreorder = preorder.slice(rootIdx + 1)
+    const rightInorder = inorder.slice(rootIdx + 1)
 
-    root.left = buildTree(preorderOfLeft, inorderOfLeft)
-    root.right = buildTree(preorderOfRight, inorderOfRight)
+    root.left = buildTree(leftPreorder, leftInorder)
+    root.right = buildTree(rightPreorder, rightInorder)
 
     return root
 };
