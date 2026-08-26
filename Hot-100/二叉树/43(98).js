@@ -11,12 +11,12 @@
  * @return {boolean}
  */
 var isValidBST = function (root) {
-    const judgement = (lower, node, upper) => {
+    function judgement(lower, node, upper) {
         if (!node) {
             return true
         }
 
-        if (node.val <= lower || node.val > upper) {
+        if (node.val <= lower || upper <= node.val) {
             return false
         }
 
