@@ -23,7 +23,6 @@ var flatten = function (root) {
             root.right = root.left
             root.left = null
         }
-
         root = root.right
     }
 };
