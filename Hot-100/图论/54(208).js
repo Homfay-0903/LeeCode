@@ -37,9 +37,9 @@ Trie.prototype.search = function (word) {
     for (const char of word) {
         if (!curNode.children[char]) {
             return false
+        } else {
+            curNode = curNode.children[char]
         }
-
-        curNode = curNode.children[char]
     }
 
     return curNode.isEnd
@@ -55,9 +55,9 @@ Trie.prototype.startsWith = function (prefix) {
     for (const char of prefix) {
         if (!curNode.children[char]) {
             return false
+        } else {
+            curNode = curNode.children[char]
         }
-
-        curNode = curNode.children[char]
     }
 
     return true
