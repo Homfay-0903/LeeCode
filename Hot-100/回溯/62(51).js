@@ -8,28 +8,28 @@ var solveNQueens = function (n) {
     const rowSubCol = new Set()
     const rowAddCol = new Set()
 
-    const backTrack = (curRow, curRes) => {
+    function backTrack(curRow, path) {
         if (curRow === n) {
-            res.push(curRes.map(colIdx => '.'.repeat(colIdx) + 'Q' + '.'.repeat(n - colIdx - 1)))
+            res.push(path.map((idx) => '.'.repeat(idx) + 'Q' + '.'.repeat(n - idx - 1)))
             return
         }
 
         for (let curCol = 0; curCol < n; curCol++) {
-            if (hasCol.has(curCol) || rowAddCol.has(curRow + curCol) || rowSubCol.has(curRow - curCol)) {
+            if (hasCol.has(curCol) || rowSubCol.has(curRow - curCol) || rowAddCol.has(curRow + curCol)) {
                 continue
             }
 
             hasCol.add(curCol)
-            rowAddCol.add(curRow + curCol)
             rowSubCol.add(curRow - curCol)
-            curRes.push(curCol)
+            rowAddCol.add(curRow + curCol)
+            path.push(curCol)
 
-            backTrack(curRow + 1, curRes)
+            backTrack(curRow + 1, path)
 
             hasCol.delete(curCol)
-            rowAddCol.delete(curRow + curCol)
             rowSubCol.delete(curRow - curCol)
-            curRes.pop()
+            rowAddCol.delete(curRow + curCol)
+            path.pop()
         }
     }
 
