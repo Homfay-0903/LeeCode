@@ -14,21 +14,21 @@ var letterCombinations = function (digits) {
         '9': 'wxyz'
     }
 
-    let combination = digitsToLetters[digits[0]].split('')
+    let preCombination = digitsToLetters[digits[0]].split('')
 
     for (let i = 1; i < digits.length; i++) {
         const newCombination = []
-        const curDigits = digits[i]
-        const curLettersChar = digitsToLetters[curDigits].split('')
+        const curCombination = digitsToLetters[digits[i]].split('')
 
-        for (const preChar of combination) {
-            for (const curChar of curLettersChar) {
-                newCombination.push(preChar + curChar)
+        for (const preChar of preCombination) {
+            for (const curChar of curCombination) {
+                const newStr = preChar + curChar
+                newCombination.push(newStr)
             }
         }
 
-        combination = newCombination
+        preCombination = newCombination
     }
 
-    return combination
+    return preCombination
 };
