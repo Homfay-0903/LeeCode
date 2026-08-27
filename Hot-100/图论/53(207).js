@@ -4,35 +4,38 @@
  * @return {boolean}
  */
 var canFinish = function (numCourses, prerequisites) {
-    let finishedCourse = 0
-
+    let finishedCount = 0
+    const courseQueue = []
     const relation = new Array(numCourses).fill(0).map(() => [])
     const inDegree = new Array(numCourses).fill(0)
-    const courseQueue = []
 
-    for (const [curCoures, preCourse] of prerequisites) {
-        relation[preCourse].push(curCoures)
-        inDegree[curCoures]++
+    for (const [curCourse, preCourse] of prerequisites) {
+        relation[preCourse].push(curCourse)
+        inDegree[curCourse]++
     }
 
     for (let i = 0; i < numCourses; i++) {
-        if (!inDegree[i]) {
+        if (inDegree[i] === 0) {
             courseQueue.push(i)
         }
     }
 
-    while (courseQueue.length) {
-        const learnedCoures = courseQueue.shift()
-        finishedCourse++
+    while (courseQueue.length > 0) {
+        const curCourseCount = courseQueue.length
 
-        for (const nextCourse of relation[learnedCoures]) {
-            inDegree[nextCourse]--
+        for (let i = 0; i < curCourseCount; i++) {
+            const learnedCourse = courseQueue.shift()
+            finishedCount++
 
-            if (!inDegree[nextCourse]) {
-                courseQueue.push(nextCourse)
+            for (const nextCourse of relation[learnedCourse]) {
+                inDegree[nextCourse]--
+
+                if (inDegree[nextCourse] === 0) {
+                    courseQueue.push(nextCourse)
+                }
             }
         }
     }
 
-    return finishedCourse === numCourses
+    return finishedCount === numCourses
 };
