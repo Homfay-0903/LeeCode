@@ -3,25 +3,24 @@
  * @return {number[][]}
  */
 var permute = function (nums) {
-    const len = nums.length
     const res = []
-    const isUsed = new Array(len).fill(false)
+    const n = nums.length
+    const isUsed = new Array(n).fill(false)
 
-    const backTrack = (curPath) => {
-        if (curPath.length === len) {
-            res.push([...curPath])
-            return
+    function backTrack(path) {
+        if (path.length === n) {
+            res.push([...path])
         }
 
-        for (let i = 0; i < len; i++) {
-            if (!isUsed[i]) {
-                isUsed[i] = true
-                curPath.push(nums[i])
+        for (const num of nums) {
+            if (!isUsed[num]) {
+                path.push(num)
+                isUsed[num] = true
 
-                backTrack(curPath)
+                backTrack(path)
 
-                isUsed[i] = false
-                curPath.pop()
+                path.pop(num)
+                isUsed[num] = false
             }
         }
     }
