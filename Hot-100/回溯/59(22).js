@@ -4,10 +4,10 @@
  */
 var generateParenthesis = function (n) {
     const res = []
-    const totalLength = 2 * n
+    const totalLen = 2 * n
 
-    const backTrack = (leftCount, rightCount, path) => {
-        if (path.length === totalLength) {
+    function backTrack(leftCount, rightCount, path) {
+        if (path.length === totalLen) {
             res.push(path)
             return
         }
