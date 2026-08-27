@@ -9,10 +9,9 @@ var subsets = function (nums) {
         const curResLen = res.length
 
         for (let i = 0; i < curResLen; i++) {
-            const newRes = [...res[i]]
-
-            newRes.push(num)
-            res.push(newRes)
+            const curRes = [...res[i]]
+            curRes.push(num)
+            res.push(curRes)
         }
     }
 
