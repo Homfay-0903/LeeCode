@@ -4,10 +4,9 @@
  * @return {number[]}
  */
 var searchRange = function (nums, target) {
-    let left = 0
-    let right = nums.length - 1
+    let left = 0, right = nums.length - 1
+    let leftIdx = -1, rightIdx = -1
 
-    let leftIdx = -1
     while (left <= right) {
         const mid = Math.floor((left + right) / 2)
 
@@ -21,9 +20,7 @@ var searchRange = function (nums, target) {
         }
     }
 
-    left = 0
-    right = nums.length - 1
-    let rightIdx = -1
+    left = 0, right = nums.length - 1
     while (left <= right) {
         const mid = Math.floor((left + right) / 2)
 
