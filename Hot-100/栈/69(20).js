@@ -3,24 +3,24 @@
  * @return {boolean}
  */
 var isValid = function (s) {
-    const len = s.length
-    const bracktsStack = []
-
-    const bracktsMap = {
-        ')': '(',
-        ']': '[',
-        '}': '{'
+    const stack = []
+    const bracketsMap = {
+        '(': ')',
+        '{': '}',
+        '[': ']'
     }
 
-    for (const brackt of s) {
-        if (!bracktsMap[brackt]) {
-            bracktsStack.push(brackt)
+    for (const bracket of s) {
+        if (bracketsMap[bracket]) {
+            stack.push(bracket)
         } else {
-            if (!bracktsStack.length || bracktsStack.pop() !== bracktsMap[brackt]) {
+            const leftBracket = stack.pop()
+
+            if (bracket !== bracketsMap[leftBracket]) {
                 return false
             }
         }
     }
 
-    return !bracktsStack.length ? true : false
+    return stack.length === 0 ? true : false
 };
