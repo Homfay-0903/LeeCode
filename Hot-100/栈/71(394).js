@@ -3,32 +3,26 @@
  * @return {string}
  */
 var decodeString = function (s) {
-    const charStack = []
-    let curChar = ''
+    let curStr = ''
     let curNum = 0
+    const stack = []
 
     for (const char of s) {
         if (/^\d$/.test(char)) {
             curNum = curNum * 10 + (char - '0')
         } else if (char === '[') {
-            charStack.push({
-                num: curNum,
-                str: curChar
+            stack.push({
+                str: curStr,
+                num: curNum
             })
-
-            curChar = ''
-            curNum = 0
+            curStr = '', curNum = 0
         } else if (char === ']') {
-            const {
-                num: preNum,
-                str: preStr
-            } = charStack.pop()
-
-            curChar = preStr + curChar.repeat(preNum)
+            const { str: preStr, num: preNum } = stack.pop()
+            curStr = preStr + curStr.repeat(preNum)
         } else {
-            curChar += char
+            curStr += char
         }
     }
 
-    return curChar
+    return curStr
 };
