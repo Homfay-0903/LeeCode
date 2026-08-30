@@ -21,32 +21,35 @@ class MyHeap {
         while (true) {
             const left = index * 2 + 1
             const right = index * 2 + 2
-            let smallest = index
+            let minestIdx = index
 
-            if (left < n && this.compareFn(this.heap[left], this.heap[smallest]) < 0) {
-                smallest = left
-            }
-            if (right < n && this.compareFn(this.heap[right], this.heap[smallest]) < 0) {
-                smallest = right
+            if (left < n && this.compareFn(this.heap[minestIdx], this.heap[left]) > 0) {
+                minestIdx = left
             }
 
-            if (smallest === index) {
+            if (right < n && this.compareFn(this.heap[minestIdx], this.heap[right]) > 0) {
+                minestIdx = right
+            }
+
+            if (minestIdx === index) {
                 break
             }
-            [this.heap[index], this.heap[smallest]] = [this.heap[smallest], this.heap[index]]
-            index = smallest
+
+            [this.heap[index], this.heap[minestIdx]] = [this.heap[minestIdx], this.heap[index]]
+            index = minestIdx
         }
     }
 
     push(val) {
         this.heap.push(val)
-        this.#siftUp(this.heap.length - 1)
+        this.#siftUp(this.size() - 1)
     }
 
     pop() {
         if (this.size() === 0) {
             return null
         }
+
         const top = this.heap[0]
         const last = this.heap.pop()
 
@@ -67,7 +70,6 @@ class MyHeap {
     }
 }
 
-// 主类不变，只修改堆的实例化
 class MedianFinder {
     constructor() {
         this.small = new MyHeap((a, b) => b - a)
