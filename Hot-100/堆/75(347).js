@@ -9,15 +9,15 @@ var topKFrequent = function (nums, k) {
         freqMap.set(num, (freqMap.get(num) || 0) + 1)
     }
 
-    const bucketArr = new Array(nums.length + 1).fill(null).map(() => [])
-    for ([num, count] of freqMap) {
-        bucketArr[count].push(num)
+    const bucket = new Array(nums.length + 1).fill(0).map(() => [])
+    for (const [num, freq] of freqMap) {
+        bucket[freq].push(num)
     }
 
     const res = []
-    for (let i = bucketArr.length - 1; i >= 0 && res.length < k; i--) {
-        if (bucketArr[i]) {
-            res.push(...bucketArr[i])
+    for (let i = bucket.length - 1; i >= 0 && res.length < k; i--) {
+        if (bucket[i].length > 0) {
+            res.push(...bucket[i])
         }
     }
 
