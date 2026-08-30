@@ -3,24 +3,18 @@
  * @return {number}
  */
 var jump = function (nums) {
-    const len = nums.length
+    const n = nums.length
+    let jumps = 0
+    let curEnd = 0, nextEnd = 0
 
-    if (len === 1) {
-        return 0
-    }
-
-    let jump = 0
-    let curEnd = 0
-    let nextMaxEnd = 0
-
-    for (let i = 0; i < len - 1; i++) {
-        nextMaxEnd = Math.max(nextMaxEnd, nums[i] + i)
+    for (let i = 0; i < nums.length - 1; i++) {
+        nextEnd = Math.max(nextEnd, i + nums[i])
 
         if (i === curEnd) {
-            jump++
-            curEnd = nextMaxEnd
+            jumps++
+            curEnd = nextEnd
         }
     }
 
-    return jump
+    return jumps
 };
