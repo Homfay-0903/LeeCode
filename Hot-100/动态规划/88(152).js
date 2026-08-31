@@ -3,21 +3,20 @@
  * @return {number}
  */
 var maxProduct = function (nums) {
-    const len = nums.length
+    const n = nums.length
+    let minSoFar = nums[0]
+    let maxSoFar = nums[0]
+    let maxRes = nums[0]
 
-    let maxSumSoFar = nums[0]
-    let minSumSoFar = nums[0]
-    let result = nums[0]
+    for (let i = 1; i < n; i++) {
+        let preMinSoFar = minSoFar
+        let preMaxSoFar = maxSoFar
 
-    for (let i = 1; i < len; i++) {
-        let preMaxSum = maxSumSoFar
-        let preminSum = minSumSoFar
+        minSoFar = Math.min(preMinSoFar * nums[i], preMaxSoFar * nums[i], nums[i])
+        maxSoFar = Math.max(preMaxSoFar * nums[i], preMinSoFar * nums[i], nums[i])
 
-        maxSumSoFar = Math.max(nums[i], nums[i] * preMaxSum, nums[i] * preminSum)
-        minSumSoFar = Math.min(nums[i], nums[i] * preMaxSum, nums[i] * preminSum)
-
-        result = Math.max(result, maxSumSoFar)
+        maxRes = Math.max(maxRes, maxSoFar)
     }
 
-    return result
+    return maxRes
 };
