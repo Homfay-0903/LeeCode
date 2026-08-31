@@ -3,29 +3,24 @@
  * @return {number}
  */
 var longestValidParentheses = function (s) {
-    const len = s.length
-    let maxLength = 0
-
-    if (!len) {
-        return maxLength
-    }
-
+    const n = s.length
     const stack = [-1]
+    let maxLen = 0
 
-    for (let i = 0; i < len; i++) {
+    for (let i = 0; i < n; i++) {
         if (s[i] === '(') {
             stack.push(i)
         } else {
-            stack.pop()
+            const idx = stack.pop()
 
-            if (!stack.length) {
+            if (s[idx] !== '(') {
                 stack.push(i)
                 continue
             }
 
-            maxLength = Math.max(maxLength, i - stack[stack.length - 1])
+            maxLen = Math.max(maxLen, i - stack[stack.length - 1])
         }
     }
 
-    return maxLength
+    return maxLen
 };
