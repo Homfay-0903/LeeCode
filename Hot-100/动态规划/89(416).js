@@ -3,19 +3,20 @@
  * @return {boolean}
  */
 var canPartition = function (nums) {
-    const sum = nums.reduce((acc, val) => (acc + val), 0)
+    const totalSum = nums.reduce((acc, val) => acc + val, 0)
 
-    if (sum % 2) {
+    if (totalSum % 2) {
         return false
     }
 
-    const target = sum / 2
+    const target = totalSum / 2
     const dp = new Array(target + 1).fill(false)
+
     dp[0] = true
 
     for (const num of nums) {
-        for (let j = target; j >= num; j--) {
-            dp[j] = dp[j] || dp[j - num]
+        for (let i = target; i >= num; i--) {
+            dp[i] = dp[i] || dp[i - num]
         }
 
         if (dp[target]) {
