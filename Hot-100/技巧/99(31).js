@@ -3,28 +3,28 @@
  * @return {void} Do not return anything, modify nums in-place instead.
  */
 var nextPermutation = function (nums) {
-    const len = nums.length
-    let point = len - 2
+    const n = nums.length
+    let pointer = n - 2
 
-    while (point >= 0 && nums[point] >= nums[point + 1]) {
-        point--
+    while (pointer >= 0 && nums[pointer] >= nums[pointer + 1]) {
+        pointer--
     }
 
-    if (point >= 0) {
-        let swap = len - 1
+    if (pointer >= 0) {
+        let swap = n - 1
 
-        while (swap > point && nums[swap] <= nums[point]) {
+        while (swap > pointer && nums[swap] <= nums[pointer]) {
             swap--
         }
 
-        [nums[swap], nums[point]] = [nums[point], nums[swap]]
+        [nums[swap], nums[pointer]] = [nums[pointer], nums[swap]]
     }
 
-    let start = point + 1
-    let end = len - 1
-    while (start < end) {
-        [nums[start], nums[end]] = [nums[end], nums[start]]
-        start++
-        end--
+    let left = pointer + 1
+    let right = n - 1
+
+    while (left < right) {
+        [nums[left], nums[right]] = [nums[right], nums[left]]
+        left++, right--
     }
 };
