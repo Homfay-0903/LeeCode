@@ -4,18 +4,19 @@
  */
 var sortColors = function (nums) {
     let left = 0, right = nums.length - 1
-    let point = 0
+    let leftEnd = left, rightStart = right
+    let pointer = left
 
-    while (point <= right) {
-        if (nums[point] < 1) {
-            [nums[point], nums[left]] = [nums[left], nums[point]]
-            left++
-            point++
-        } else if (nums[point] === 1) {
-            point++
+    while (pointer <= rightStart) {
+        if (nums[pointer] < 1) {
+            [nums[pointer], nums[leftEnd]] = [nums[leftEnd], nums[pointer]]
+            pointer++
+            leftEnd++
+        } else if (nums[pointer] === 1) {
+            pointer++
         } else {
-            [nums[point], nums[right]] = [nums[right], nums[point]]
-            right--
+            [nums[pointer], nums[rightStart]] = [nums[rightStart], nums[pointer]]
+            rightStart--
         }
     }
 };
