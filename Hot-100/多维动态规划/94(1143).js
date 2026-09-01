@@ -6,8 +6,7 @@
 var longestCommonSubsequence = function (text1, text2) {
     const text1Len = text1.length
     const text2Len = text2.length
-    const dp = new Array(text1Len + 1).fill(null).map(() => new Array(text2Len + 1).fill(0))
-
+    const dp = new Array(text1Len + 1).fill(0).map(() => new Array(text2Len + 1).fill(0))
 
     for (let i = 1; i <= text1Len; i++) {
         for (let j = 1; j <= text2Len; j++) {
