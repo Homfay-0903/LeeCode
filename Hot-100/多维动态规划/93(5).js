@@ -3,34 +3,33 @@
  * @return {string}
  */
 var longestPalindrome = function (s) {
-    const len = s.length
+    const n = s.length
 
-    if (len < 2) {
+    if (n < 2) {
         return s
     }
 
-    const expandFromCenter = (str, left, right) => {
-        while (left >= 0 && right < len && str[left] === str[right]) {
-            left--
-            right++
+    function expandPalindrome(left, right) {
+        while (left >= 0 && right < n && s[left] === s[right]) {
+            left--, right++
         }
 
         return right - left - 1
     }
 
     let maxLen = 0
-    let charStart = null
+    let startPos = 0
 
-    for (let i = 0; i < len; i++) {
-        const oddCenterLen = expandFromCenter(s, i, i)
-        const evenCenterLen = expandFromCenter(s, i, i + 1)
-        const curMaxLen = Math.max(oddCenterLen, evenCenterLen)
+    for (let i = 0; i < n; i++) {
+        const odd = expandPalindrome(i, i)
+        const even = expandPalindrome(i, i + 1)
+        const curLen = Math.max(odd, even)
 
-        if (curMaxLen > maxLen) {
-            maxLen = curMaxLen
-            charStart = i - Math.floor((maxLen - 1) / 2)
+        if (curLen > maxLen) {
+            maxLen = curLen
+            startPos = i - Math.floor((maxLen - 1) / 2)
         }
     }
 
-    return s.substring(charStart, charStart + maxLen)
+    return s.substring(startPos, startPos + maxLen)
 };
